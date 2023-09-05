@@ -2,8 +2,8 @@
   --margin-left-right: 150px;
   --margin-top-bottom: 10px;
   --main-bg-color: white;
-  --header-color: white;
-  --header-font-size: 1.2rem;
+  --text-color: #2f2f2f;
+  --header-font-size: 1.3rem;
   --regular-font-size: 1.2rem;
 }
 html {
@@ -12,7 +12,7 @@ html {
 }
 
 body {
-  color: #2f2f2f;
+  color: var(--text-color);
   font-family: "Montserrat", sans-serif;
   background-color: var(--main-bg-color);
   margin: 0;
@@ -21,19 +21,64 @@ body {
 
 .page-header {
   margin: 0;
-  font-size: var(--regular-font-size);
+  font-size: var(--header-font-size);
   padding: var(--margin-top-bottom) var(--margin-left-right)
     var(--margin-top-bottom) var(--margin-left-right);
   background-color: var(--header-color);
   position: sticky;
   top: 0;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid var(--text-color);
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-weight: light;
+}
+
+main > h2 {
+  margin: 0;
+  padding-bottom: 20px;
 }
 
 main > button {
   background-color: var(--main-bg-color);
+  margin-top: 70px;
+  margin-bottom: 70px;
   padding: var(--margin-top-bottom) var(--margin-left-right)
     var(--margin-top-bottom) var(--margin-left-right);
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--text-color);
+  border-radius: 10px;
+  border: 1px solid var(--text-color);
+  cursor: pointer;
+}
+
+.table {
+  width: 70%;
+  border-collapse: collapse;
+  margin: 25px 0;
+  padding: 5px;
+  font-size: 1.1rem;
+  min-width: 400px;
+}
+
+.table > thead > tr > th {
+  text-align: left;
+  padding-bottom: 15px;
+}
+
+.table > tbody > tr {
+  border-top: 1px dotted #2f2f2f;
+  padding-bottom: 15px;
+}
+
+.table > tbody > tr > td {
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 
 .modal {
@@ -43,7 +88,7 @@ main > button {
   left: 50%;
   transform: translate(-50%, -50%) scale(0);
   transition: 200ms ease-in-out;
-  border: 1px solid black;
+  border: 1px solid var(--text-color);
   border-radius: 20px;
   display: grid;
   z-index: 10;
@@ -57,7 +102,7 @@ main > button {
 }
 
 .modal > header {
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid var(--text-color);
   font-size: var(--header-font-size);
   display: flex;
   flex-direction: row;
@@ -82,20 +127,20 @@ main > button {
   margin-top: var(--margin-top-bottom);
   margin-bottom: var(--margin-top-bottom);
   background-color: var(--header-color);
-  border: 1px solid black;
+  border: 1px solid var(--text-color);
   border-radius: 10px;
 }
 
 .modal > header > .close-button,
 .modal > button {
-  color: #2f2f2f;
+  color: var(--text-color);
   cursor: pointer;
   padding-top: 10px;
   padding-bottom: 10px;
   font-weight: bold;
   font-size: var(--regular-font-size);
   border-radius: 10px;
-  border: 1px solid black;
+  border: 1px solid var(--text-color);
   background-color: var(--header-color);
 }
 
@@ -105,8 +150,9 @@ main > button {
 }
 
 .modal > header > .close-button:hover,
-.modal > button:hover {
-  background-color: #2f2f2f;
+.modal > button:hover,
+main > button:hover {
+  background-color: var(--text-color);
   color: var(--main-bg-color);
 }
 
@@ -125,4 +171,27 @@ main > button {
 #overlay.active {
   opacity: 1;
   pointer-events: all;
+}
+
+@media (max-width: 700px) {
+  .page-header {
+    margin: 0;
+    font-size: 1.1rem;
+    padding: 1px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  main > button {
+    margin-top: 30px;
+    padding: 20px;
+    font-size: 1.2rem;
+  }
+  .table {
+    border-collapse: collapse;
+    margin: 25px 0;
+    padding: 5px;
+    font-size: 0.9rem;
+    min-width: 400px;
+  }
 }

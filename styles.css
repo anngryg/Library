@@ -1,0 +1,128 @@
+:root {
+  --margin-left-right: 150px;
+  --margin-top-bottom: 10px;
+  --main-bg-color: white;
+  --header-color: white;
+  --header-font-size: 1.2rem;
+  --regular-font-size: 1.2rem;
+}
+html {
+  width: 100%;
+  position: relative;
+}
+
+body {
+  color: #2f2f2f;
+  font-family: "Montserrat", sans-serif;
+  background-color: var(--main-bg-color);
+  margin: 0;
+  padding: 0;
+}
+
+.page-header {
+  margin: 0;
+  font-size: var(--regular-font-size);
+  padding: var(--margin-top-bottom) var(--margin-left-right)
+    var(--margin-top-bottom) var(--margin-left-right);
+  background-color: var(--header-color);
+  position: sticky;
+  top: 0;
+  border-bottom: 1px solid black;
+}
+
+main > button {
+  background-color: var(--main-bg-color);
+  padding: var(--margin-top-bottom) var(--margin-left-right)
+    var(--margin-top-bottom) var(--margin-left-right);
+}
+
+.modal {
+  padding: 30px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  transition: 200ms ease-in-out;
+  border: 1px solid black;
+  border-radius: 20px;
+  display: grid;
+  z-index: 10;
+  background-color: var(--main-bg-color);
+  width: 500px;
+  max-width: 80%;
+}
+
+.modal.active {
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.modal > header {
+  border-bottom: 1px solid black;
+  font-size: var(--header-font-size);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.modal > header > h1 {
+  padding: 0;
+  margin: 0;
+}
+
+.modal > .inputs {
+  font-size: var(--regular-font-size);
+  display: flex;
+  flex-direction: column;
+  padding: 20px 0 20px 0;
+}
+.modal > .inputs > input {
+  font-size: var(--regular-font-size);
+  padding: 5px;
+  margin-top: var(--margin-top-bottom);
+  margin-bottom: var(--margin-top-bottom);
+  background-color: var(--header-color);
+  border: 1px solid black;
+  border-radius: 10px;
+}
+
+.modal > header > .close-button,
+.modal > button {
+  color: #2f2f2f;
+  cursor: pointer;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  font-weight: bold;
+  font-size: var(--regular-font-size);
+  border-radius: 10px;
+  border: 1px solid black;
+  background-color: var(--header-color);
+}
+
+.modal > header > .close-button {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.modal > header > .close-button:hover,
+.modal > button:hover {
+  background-color: #2f2f2f;
+  color: var(--main-bg-color);
+}
+
+#overlay {
+  position: fixed;
+  opacity: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  pointer-events: none;
+  transition: 200ms ease-in-out;
+}
+
+#overlay.active {
+  opacity: 1;
+  pointer-events: all;
+}

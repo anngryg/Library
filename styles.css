@@ -72,7 +72,7 @@ main > button {
 }
 
 .table > tbody > tr {
-  border-top: 1px dotted #2f2f2f;
+  border-top: 1px dashed #2f2f2f;
   padding-bottom: 15px;
 }
 
@@ -131,8 +131,22 @@ main > button {
   border-radius: 10px;
 }
 
+.modal > .inputs > .checkbox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.checkbox > #read-checkbox {
+  transform: scale(2);
+  margin-top: 20px;
+}
+
 .modal > header > .close-button,
-.modal > button {
+.modal > button,
+.delete-btn,
+.read-button {
   color: var(--text-color);
   cursor: pointer;
   padding-top: 10px;
@@ -144,6 +158,14 @@ main > button {
   background-color: var(--header-color);
 }
 
+.delete-btn,
+.read-button {
+  font-weight: lighter;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  font-size: 1.1rem;
+}
+
 .modal > header > .close-button {
   padding-top: 0;
   padding-bottom: 0;
@@ -151,7 +173,8 @@ main > button {
 
 .modal > header > .close-button:hover,
 .modal > button:hover,
-main > button:hover {
+main > button:hover,
+.delete-btn:hover {
   background-color: var(--text-color);
   color: var(--main-bg-color);
 }
@@ -188,6 +211,7 @@ main > button:hover {
     font-size: 1.2rem;
   }
   .table {
+    width: 95%;
     border-collapse: collapse;
     margin: 25px 0;
     padding: 5px;

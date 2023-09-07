@@ -36,6 +36,7 @@ function closeModal(modal) {
 let usersAuthor = document.querySelector("#author");
 let usersTitle = document.querySelector("#title");
 let usersPages = document.querySelector("#pages");
+let usersRead = document.querySelector("#read-checkbox");
 let userBookList = document.querySelector("tbody");
 
 let submitBtn = document.querySelector("#submit");
@@ -46,6 +47,13 @@ submitBtn.addEventListener("click", () => {
   resetInputs();
   closeModal(modal);
   createBookList();
+});
+
+usersPages.addEventListener("keypress", (event) => {
+  if (event.key === "Enter") {
+    event.preventDefault();
+    submitBtn.click();
+  }
 });
 
 const myLibrary = [];
@@ -66,7 +74,12 @@ function addBookToLibrary() {
     alert("Please fill out the fields!");
   } else {
     myLibrary.push(
-      new Book(usersTitle.value, usersAuthor.value, usersPages.value, "not")
+      new Book(
+        usersTitle.value,
+        usersAuthor.value,
+        usersPages.value,
+        usersRead.checked
+      )
     );
   }
 }
@@ -94,9 +107,42 @@ function createBookList() {
     let newPages = document.createElement("td");
     newPages.innerHTML = myLibrary[i].pages;
     newBook.appendChild(newPages);
+
+    let newTableReadButton = document.createElement("td");
+    let newReadButton = document.createElement("button");
+    newReadButton.classList.add("read-button");
+    newTableReadButton.appendChild(newReadButton);
+    newBook.appendChild(newTableReadButton);
+    if (myLibrary[i].read === true) {
+      console.log(newBook);
+      newReadButton.textContent = "read";
+      newReadButton.style.backgroundColor = "#e1b14c";
+    } else {
+      newReadButton.textContent = "not read";
+      newReadButton.style.backgroundColor = "#ec5f5f";
+    }
+    newReadButton.addEventListener("click", () => {
+      myLibrary[i].read = !myLibrary[i].read;
+      createBookList();
+    });
+
+    let newTableDeleteBtn = document.createElement("td");
+    let newDeleteBtn = document.createElement("button");
+    newDeleteBtn.classList.add("delete-btn");
+    newDeleteBtn.textContent = "delete";
+    newTableDeleteBtn.appendChild(newDeleteBtn);
+    newBook.appendChild(newTableDeleteBtn);
+    newDeleteBtn.addEventListener("click", () => {
+      removeBook([i]);
+    });
   }
 }
 
 function clearList() {
   userBookList.innerHTML = "";
+}
+
+function removeBook(index) {
+  myLibrary.splice(index, 1);
+  createBookList();
 }

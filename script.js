@@ -32,7 +32,6 @@ function closeModal(modal) {
   }
 }
 
-//
 let usersAuthor = document.querySelector("#author");
 let usersTitle = document.querySelector("#title");
 let usersPages = document.querySelector("#pages");
@@ -47,6 +46,7 @@ submitBtn.addEventListener("click", () => {
   resetInputs();
   closeModal(modal);
   createBookList();
+  addToLocalStorage();
 });
 
 usersPages.addEventListener("keypress", (event) => {
@@ -56,7 +56,7 @@ usersPages.addEventListener("keypress", (event) => {
   }
 });
 
-const myLibrary = [];
+let myLibrary = [];
 
 function Book(title, author, pages, read) {
   this.title = title;
@@ -124,6 +124,7 @@ function createBookList() {
     newReadButton.addEventListener("click", () => {
       myLibrary[i].read = !myLibrary[i].read;
       createBookList();
+      addToLocalStorage();
     });
 
     let newTableDeleteBtn = document.createElement("td");
@@ -144,5 +145,25 @@ function clearList() {
 
 function removeBook(index) {
   myLibrary.splice(index, 1);
+  addToLocalStorage();
   createBookList();
 }
+
+//
+
+/*local storage*/
+function addToLocalStorage() {
+  localStorage.setItem("myLibrary", JSON.stringify(myLibrary));
+}
+
+function showLocalStorage() {
+  if (!localStorage.myLibrary) {
+    createBookList();
+  } else {
+    let objects = localStorage.getItem("myLibrary"); // gets information from local storage to use in below loop to create DOM/display
+    objects = JSON.parse(objects);
+    myLibrary = objects;
+    createBookList();
+  }
+}
+showLocalStorage();
